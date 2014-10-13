@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 
 ### Datastores ###
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.9'
+gem 'mongoid', '~> 4.0.0'
 
 ### Assets ###
 gem 'sass-rails',   '~> 4.0.3'
