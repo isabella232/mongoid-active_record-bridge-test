@@ -27,7 +27,7 @@ module ActiveRecord::Associations
     def self.define_mutators base, metadata
       mutators = Module.new
       mutators.send :define_method, "#{metadata[:name]}=" do |value|
-        self.send metadata[:id_setter], value.try(:id)
+        self.send metadata[:id_setter], value.try(:id).try(:to_s)
       end
 
       base.include mutators

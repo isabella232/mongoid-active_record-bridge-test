@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Boss, :type => :model do
+  shared_examples 'with many mooks', :mooks => :many do
+    let!(:mooks) do
+      Array.new(3).map { create(:mook, :boss => instance) }
+    end
+  end
+
   let(:attributes) { {} }
   let(:instance)   { build(:boss, attributes) }
 
@@ -26,5 +32,19 @@ RSpec.describe Boss, :type => :model do
 
   describe '#special_attacks' do
     it { expect(instance).to have_property(:special_attacks) }
+  end
+
+  ### has_many_records :mooks ###
+
+  describe '#mooks' do
+    it { expect(instance).to have_reader :mooks }
+
+    it { expect(instance.mooks).to be == [] }
+
+    context 'with many mooks', :mooks => :many do
+      let(:instance) { super().tap &:save! }
+
+      it { expect(instance.mooks).to contain_exactly(*mooks) }
+    end
   end
 end
