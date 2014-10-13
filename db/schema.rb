@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20141013194314) do
   create_table "mooks", force: true do |t|
     t.string  "weapon"
     t.integer "hit_points"
+    t.string  "boss_id"
   end
 
 end
